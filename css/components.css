@@ -845,3 +845,164 @@
   .hero-visual-stage { height: 380px; }
   .hero-woman-img { max-height: 360px; }
 }
+
+/* 7. Order Confirmation Modal */
+.order-modal {
+  background: #180d1b;
+  border: 1px solid var(--accent-rose-bright);
+  border-radius: 1.5rem;
+  max-width: 650px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2.5rem 2rem;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), var(--glow-rose);
+}
+
+.order-modal-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.order-modal-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  background: rgba(244, 114, 182, 0.12);
+  border: 1px solid var(--border-rose);
+  border-radius: 50px;
+  font-size: 0.78rem;
+  color: var(--accent-rose-light);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.8rem;
+}
+
+.order-modal-title {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 0.4rem;
+}
+
+.order-modal-subtitle {
+  color: var(--text-rose);
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.order-summary-box {
+  background: rgba(255, 241, 242, 0.04);
+  border: 1px dashed var(--border-rose);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.8rem;
+}
+
+.order-summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.order-total-price {
+  color: var(--accent-rose-bright);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.order-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.order-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.order-form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.order-form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-rose);
+}
+
+.required-star {
+  color: #f43f5e;
+  font-weight: 700;
+}
+
+.optional-tag {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 400;
+}
+
+.order-form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 241, 242, 0.05);
+  border: 1px solid var(--border-rose);
+  border-radius: 10px;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.order-form-control:focus {
+  background: rgba(255, 241, 242, 0.1);
+  border-color: var(--accent-rose-bright);
+  box-shadow: var(--glow-rose);
+}
+
+.order-form-control.invalid {
+  border-color: #f43f5e !important;
+  background: rgba(244, 63, 94, 0.08) !important;
+  box-shadow: 0 0 10px rgba(244, 63, 94, 0.3) !important;
+}
+
+.order-error-msg {
+  display: none;
+  font-size: 0.75rem;
+  color: #f43f5e;
+  margin-top: 0.2rem;
+}
+
+.order-form-control.invalid + .order-error-msg {
+  display: block;
+}
+
+.order-form-footer {
+  margin-top: 1.8rem;
+}
+
+.btn-confirm-order {
+  width: 100%;
+  padding: 0.95rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 50px;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .order-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .order-modal {
+    padding: 1.8rem 1.2rem;
+  }
+}
+

@@ -218,20 +218,114 @@ function initEventListeners() {
     });
   }
 
-  // Checkout Button action
+  // Checkout Button action -> Open Order Modal
   const checkoutBtn = document.getElementById('checkoutBtn');
-  if (checkoutBtn) {
+  const orderOverlay = document.getElementById('orderModalOverlay');
+  const closeOrderModalBtn = document.getElementById('closeOrderModalBtn');
+
+  if (checkoutBtn && orderOverlay) {
     checkoutBtn.addEventListener('click', () => {
       if (cartState.length === 0) {
-        showToast('Votre panier est vide !', 'rose');
+        if (typeof showToast === 'function') {
+          showToast('Votre panier est vide !', 'rose');
+        }
         return;
       }
-      showToast('🎉 Commande validée avec succès ! Merci pour votre achat.', 'gold');
+      // Calculate order totals
+      const count = cartState.reduce((sum, item) => sum + item.quantity, 0);
+      const total = cartState.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      
+      const itemCountEl = document.getElementById('orderItemCount');
+      const totalAmountEl = document.getElementById('orderTotalAmount');
+      if (itemCountEl) itemCountEl.innerText = count;
+      if (totalAmountEl) totalAmountEl.innerText = `${total.toFixed(2)} DH`;
+
+      // Close cart drawer and open order modal
+      const cartOverlay = document.getElementById('cartDrawerOverlay');
+      if (cartOverlay) cartOverlay.classList.remove('active');
+
+      orderOverlay.classList.add('active');
+    });
+  }
+
+  if (closeOrderModalBtn && orderOverlay) {
+    closeOrderModalBtn.addEventListener('click', () => orderOverlay.classList.remove('active'));
+    orderOverlay.addEventListener('click', (e) => {
+      if (e.target === orderOverlay) orderOverlay.classList.remove('active');
+    });
+  }
+
+  // Order Form Validation & Submission
+  const orderForm = document.getElementById('orderForm');
+  if (orderForm) {
+    // Clear validation error when user types/modifies inputs
+    const requiredInputs = orderForm.querySelectorAll('[required]');
+    requiredInputs.forEach(input => {
+      input.addEventListener('input', () => {
+        if (input.value.trim() !== '') {
+          input.classList.remove('invalid');
+        }
+      });
+    });
+
+    orderForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const fullNameInput = document.getElementById('orderFullName');
+      const phoneInput = document.getElementById('orderPhone');
+      const cityInput = document.getElementById('orderCity');
+      const addressInput = document.getElementById('orderAddress');
+
+      let isValid = true;
+
+      // Validate Nom complet (REQUIRED)
+      if (!fullNameInput || fullNameInput.value.trim() === '') {
+        if (fullNameInput) fullNameInput.classList.add('invalid');
+        isValid = false;
+      } else {
+        fullNameInput.classList.remove('invalid');
+      }
+
+      // Validate Numéro de téléphone (REQUIRED)
+      if (!phoneInput || phoneInput.value.trim() === '') {
+        if (phoneInput) phoneInput.classList.add('invalid');
+        isValid = false;
+      } else {
+        phoneInput.classList.remove('invalid');
+      }
+
+      // Validate Ville / City (REQUIRED)
+      if (!cityInput || cityInput.value.trim() === '') {
+        if (cityInput) cityInput.classList.add('invalid');
+        isValid = false;
+      } else {
+        cityInput.classList.remove('invalid');
+      }
+
+      // Validate Localisation / Adresse (REQUIRED)
+      if (!addressInput || addressInput.value.trim() === '') {
+        if (addressInput) addressInput.classList.add('invalid');
+        isValid = false;
+      } else {
+        addressInput.classList.remove('invalid');
+      }
+
+      if (!isValid) {
+        return;
+      }
+
+      // Successful order placement
+      if (typeof showToast === 'function') {
+        showToast('🎉 Commande confirmée avec succès ! Merci pour votre achat.', 'gold');
+      }
+
       cartState = [];
       saveCart();
       renderCart();
       updateCartBadge();
-      document.getElementById('cartDrawerOverlay').classList.remove('active');
+
+      orderForm.reset();
+      if (orderOverlay) orderOverlay.classList.remove('active');
     });
   }
 }

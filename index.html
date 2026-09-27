@@ -147,6 +147,77 @@ Explorez une sélection raffinée de parfums, soins et maquillage, réunissant d
     </div>
   </div>
 
+  <!-- 6. Order Form Modal -->
+  <div class="modal-overlay" id="orderModalOverlay">
+    <div class="order-modal glass-panel">
+      <button class="modal-close-btn" id="closeOrderModalBtn">&times;</button>
+      
+      <div class="order-modal-header">
+        <div class="order-modal-tag"><i class="fa-solid fa-bag-shopping"></i> Finaliser la commande</div>
+        <h2 class="order-modal-title font-display">Informations de Livraison</h2>
+        <p class="order-modal-subtitle">Veuillez remplir vos coordonnées pour valider votre commande BeautyHub.</p>
+      </div>
+
+      <!-- Order Summary Box -->
+      <div class="order-summary-box">
+        <div class="order-summary-item">
+          <span>Articles (<span id="orderItemCount">0</span>)</span>
+          <span id="orderTotalAmount" class="order-total-price">0.00 DH</span>
+        </div>
+      </div>
+
+      <form id="orderForm" novalidate>
+        <div class="order-form-grid">
+          <!-- Nom complet (REQUIRED) -->
+          <div class="order-form-group">
+            <label class="order-form-label" for="orderFullName">Nom complet <span class="required-star">*</span></label>
+            <input type="text" id="orderFullName" class="order-form-control" placeholder="ex: Sofia Amrani" required />
+            <span class="order-error-msg" id="errFullName">Veuillez saisir votre nom complet.</span>
+          </div>
+
+          <!-- Numéro de téléphone (REQUIRED) -->
+          <div class="order-form-group">
+            <label class="order-form-label" for="orderPhone">Numéro de téléphone <span class="required-star">*</span></label>
+            <input type="tel" id="orderPhone" class="order-form-control" placeholder="ex: 06 12 34 56 78" required />
+            <span class="order-error-msg" id="errPhone">Veuillez saisir votre numéro de téléphone.</span>
+          </div>
+
+          <!-- Ville / City (REQUIRED) -->
+          <div class="order-form-group">
+            <label class="order-form-label" for="orderCity">Ville / City <span class="required-star">*</span></label>
+            <input type="text" id="orderCity" class="order-form-control" placeholder="ex: Casablanca, Rabat, Marrakech..." required />
+            <span class="order-error-msg" id="errCity">Veuillez indiquer votre ville.</span>
+          </div>
+
+          <!-- Gmail / Email (OPTIONAL) -->
+          <div class="order-form-group">
+            <label class="order-form-label" for="orderEmail">Gmail / Email <span class="optional-tag">(Optionnel)</span></label>
+            <input type="email" id="orderEmail" class="order-form-control" placeholder="ex: exemple@gmail.com" />
+          </div>
+
+          <!-- Localisation (texte) (REQUIRED) -->
+          <div class="order-form-group full-width">
+            <label class="order-form-label" for="orderAddress">Localisation / Adresse de livraison <span class="required-star">*</span></label>
+            <textarea id="orderAddress" class="order-form-control" rows="2" placeholder="ex: Rue 14, Quartier Gauthier, Immeuble B, Appt 5" required></textarea>
+            <span class="order-error-msg" id="errAddress">Veuillez saisir votre adresse de livraison.</span>
+          </div>
+
+          <!-- Localisation URL (Google Maps) (OPTIONAL) -->
+          <div class="order-form-group full-width">
+            <label class="order-form-label" for="orderMapsUrl">Lien Localisation Google Maps <span class="optional-tag">(Optionnel)</span></label>
+            <input type="url" id="orderMapsUrl" class="order-form-control" placeholder="ex: https://maps.google.com/?q=..." />
+          </div>
+        </div>
+
+        <div class="order-form-footer">
+          <button type="submit" class="btn-primary btn-confirm-order" id="submitOrderBtn">
+            Confirmer la Commande <i class="fa-solid fa-check"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
